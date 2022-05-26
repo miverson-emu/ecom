@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import HorizontalScroll from './HorizontalScroll';
 import ScrollItem from './ScrollItem';
 
+const theme = "#E26A6A";
 
 export default function ShoppingZone() {
 	const arrowWidth = 60;
@@ -24,23 +25,17 @@ export default function ShoppingZone() {
 		<View ref = { viewRef } style = {{ flex: 1, position: "relative" }}>
 			<HorizontalScroll 
 				title = "Tops" 
-				theme = "#E26A6A" 
-				RenderItem = {
-					({ item }) => <ScrollItem item = { item } theme = "#E26A6A" arrowWidth = { arrowWidth } />
-				}/>
+				theme = { theme }
+				/>
 				<HorizontalScroll 
-				title = "Tops" 
-				theme = "#E26A6A" 
-				RenderItem = {
-					({ item }) => <ScrollItem item = { item } theme = "#E26A6A" arrowWidth = { arrowWidth } />
-				}/>
-				<HorizontalScroll 
-				title = "Tops" 
-				theme = "#E26A6A" 
+				title = "Bottoms" 
+				theme = { theme }
+				/>
 
-				RenderItem = {
-					({ item }) => <ScrollItem item = { item } theme = "#E26A6A" arrowWidth = { arrowWidth }/>
-				}/>
+				<HorizontalScroll 
+				title = "Accessories" 
+				theme = { theme }
+				/>
 			
 		</View>
 	)

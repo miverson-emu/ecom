@@ -9,14 +9,15 @@ export default function ScrollItem({ item, theme }) {
 	const [ color, setColor ] = useState(theme)
 
 
+	const onPress = () => {
+		setColor(color == theme ? "lightgrey" : theme)
+	}
 	return (
 		<View style = {[ { opacity: item.placeholder ? 0 : 100 }]}>
 
 			{/* ITEM IMAGE */}
 			<TouchableOpacity
-			onPress = { () => {
-				setColor(color == theme ? "lightgrey" : theme)
-			}}>
+			onPress = {onPress}>
 
 				<View style = {[ styles.item, 
 					{ 

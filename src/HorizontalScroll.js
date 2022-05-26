@@ -2,8 +2,9 @@ import { FlatList, StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from
 import { useState, useRef, useEffect } from 'react'
 import { Title } from 'react-native-paper'
 import IOIcon from 'react-native-vector-icons/Ionicons';
+import ScrollItem from './ScrollItem';
 
-export default function HorizontalScroll({ theme, title, RenderItem, arrowWidth, itemWidth }) {
+export default function HorizontalScroll({ theme, title }) {
 
 	const [ pos, setPos ] = useState(0)
 	const [item_size, item_margin, item_padding] = [100, 15, 0]
@@ -54,7 +55,13 @@ export default function HorizontalScroll({ theme, title, RenderItem, arrowWidth,
 		console.log("Scroll Left")
 		setPos(pos - 1)
 	}
+	const onArrowPress = (isLeft) => {
 
+	}
+
+	const RenderItem = ({ item }) => {
+		return <ScrollItem item = { item } theme = { theme } />
+	}
 	return (
 
 		<View>
@@ -66,26 +73,26 @@ export default function HorizontalScroll({ theme, title, RenderItem, arrowWidth,
 				<TouchableOpacity
 					style = {{ alignSelf: "center" }}
 					disabled = { pos == 0 }
-					onPress = {() => { scrollLeft() }}>
+					onPress = { scrollLeft }>
 					<IOIcon name = "chevron-back" style = {{ color: pos == 0 ? "lightgrey": theme}} size = {50}/>
 				</TouchableOpacity>			
 				
 				<FlatList 
-				horizontal
-				scrollEnabled = { false }
-				data = { DATA }
-				ref = { itemListing }
-				renderItem = { RenderItem }
-				keyExtractor = { (item, index) => index}
-				style = {{ flexGrow: 0 }}
-				contentContainerStyle = {{ 
-					width: (item_size + (item_margin * 2) + (item_padding * 2)) * 3 ,
-					alignSelf: "center", 
-					minHeight: item_size + (item_margin * 2) + (item_padding * 2)
-				}}
-				onScrollToIndexFailed = { (error) => {
-					console.log(error) 
-				}}
+					horizontal
+					scrollEnabled = { false }
+					data = { DATA }
+					ref = { itemListing }
+					renderItem = { RenderItem }
+					keyExtractor = { (item, index) => index}
+					style = {{ flexGrow: 0 }}
+					contentContainerStyle = {{ 
+						width: (item_size + (item_margin * 2) + (item_padding * 2)) * 3 ,
+						alignSelf: "center", 
+						minHeight: item_size + (item_margin * 2) + (item_padding * 2)
+					}}
+					onScrollToIndexFailed = { (error) => {
+						console.log(error) 
+					}}
 				/>
 
 				<View style = { [ styles.highlight, { width: item_size + ( 2 * item_margin), height: item_size + ( 2 * item_margin) + titleSize } ] }/>
@@ -93,7 +100,7 @@ export default function HorizontalScroll({ theme, title, RenderItem, arrowWidth,
 				<TouchableOpacity
 					style = {{ alignSelf: "center"}}
 					disabled = { pos == DATA.length - 3 }
-					onPress = {() => { scrollRight() }}>
+					onPress = { scrollRight }>
 					<IOIcon name = "chevron-forward" style = {{ color: pos == DATA.length - 3 ? "lightgrey": theme}} size = {50}/>
 				</TouchableOpacity>
 
